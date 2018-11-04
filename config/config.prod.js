@@ -19,15 +19,26 @@ module.exports = appInfo => {
     
   }
 
-  config.security= {
-    csrf: {
-      enable: false
-    }
-  }
   //配置静态支援
   config.static = {
     prefix:'/public/',
     dir:path.join(appInfo.baseDir, 'app/public')
+  }
+
+  config.sequelize = {
+    dialect: 'mysql',
+    host: 'cdb-k9iy22xs.cd.tencentcdb.com',
+    port: 10027,
+    database: 'startDB',
+    username:'root',
+    password:"ly18820146660",
+    timezone: '+08:00' //东八时区
+  };
+
+  config.security= {
+    csrf: {
+      enable: false
+    }
   }
 
   // 自定义端口

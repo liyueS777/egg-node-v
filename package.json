@@ -13,10 +13,12 @@
     "egg-bin": "^4.3.5",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.14.0",
+    "egg-sequelize": "^4.1.0",
     "egg-view-ejs": "^2.0.0",
     "ejs": "^2.6.1",
     "eslint": "^4.11.0",
     "eslint-config-egg": "^6.0.0",
+    "mysql2": "^1.6.1",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {

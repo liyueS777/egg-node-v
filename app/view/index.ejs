@@ -9,11 +9,119 @@
 <body>
     <div class="b">
         <h1>HHIII</h1>
+        <div id="post1">测试-查询</div>
+        <hr>
+        <div id="post2">
+            <div>title:<input id="title" placeHolder="请输入title" /></div>
+            <div>body:<input id="body" placeHolder="请输入body" /></div>
+            <button id="create">create</button>
+        </div>
+        <hr>
+        <div id="post3">
+            <div>删除的id:<input id="deleteId" placeHolder="请输入id" /></div>
+            <button id="delete">delete</button>
+        </div>
+        <hr>
+        <div id="post4">
+            <div>id:<input id="updateId" placeHolder="请输入需要更新的id" /></div>
+            <div>title:<input id="updateTitle" placeHolder="请输入需要更新的title" /></div>
+            <div>body:<input id="updateBody" placeHolder="请输入需要更新的body" /></div>
+            <button id="update">update</button>
+        </div>
+        <hr>
+        <div id="post5">
+            <div>name:<input id="name" placeHolder="请输入name" /></div>
+            <div>pwd:<input id="pwd" placeHolder="请输入pwd" /></div>
+            <button id="login">login并且返回关联信息</button>
+        </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
     <script>
-    
+        $(function(){
+            var prefix = '/api/vi'
+            $('#post1').on('click',function(){
+                axios.post(prefix+'/index',{
+                    token:123
+                })
+                .then(function(res){
+                    console.log(res)
+                })
+                .catch(function(e){
+                    console.log(e)
+                })
+            });
+            $('#create').on('click',function(){
+                if(!$('#title').val()){
+                    alert('缺少title')
+                    return
+                }
+                if(!$('#body').val()){
+                    alert('缺少body')
+                    return
+                }
+                axios.post(prefix+'/create',{
+                    title:$('#title').val(),
+                    body:$('#body').val()
+                })
+                .then(function(res){
+                    console.log(res.data)
+                })
+            })
+            $('#delete').on('click',function(){
+                if(!$('#deleteId').val()){
+                    alert('缺少ID')
+                    return
+                }
+                axios.post(prefix+'/deleteById',{
+                    id:$('#deleteId').val()
+                })
+                .then(function(res){
+                    console.log(res.data)
+                })
+            });
+            $('#update').on('click',function(){
+                if(!$('#updateId').val()){
+                    alert('缺少id')
+                    return;
+                }
+                //至少有一个更新；
+                if(!$('#updateTitle').val() && !$('#updateBody').val()){
+                    alert('缺少需要更新的参数')
+                    return
+                };
+                var data = {
+                    id:$('#updateId').val()
+                };
+                if($('#updateTitle').val()){
+                    data["title"] = $('#updateTitle').val()
+                }
+                if($('#updateBody').val()){
+                    data["body"] = $('#updateBody').val()
+                }
+                axios.post(prefix+'/update',data)
+                .then(function(res){
+                    console.log(res.data)
+                })
+            });
+            $('#login').on('click',function(){
+                if($("#name").val() && $('#pwd').val()){
+                    axios.post(prefix+'/login',{
+                        name:$("#name").val(),
+                        password:$("#pwd").val()
+                    })
+                    .then(function(res){
+                        console.log(res.data)
+                    })
+                    .catch(function(e){
+                        console.log(e)
+                    })
+                }
+                else{
+                    alert('缺少相应参数')
+                }
+            })
+        })
     </script>
 </body>
 </html>

@@ -30,9 +30,11 @@ module.exports = appInfo => {
     host: 'cdb-k9iy22xs.cd.tencentcdb.com',
     port: 10027,
     database: 'startDB',
-    username:'root',
-    password:"ly18820146660",
-    timezone: '+08:00' //东八时区
+    username: 'root',
+    password: "ly18820146660",
+    'timezone': "+08:00",//东八区
+    // 是否同步
+    sync: { force: true }
   };
 
   config.security= {

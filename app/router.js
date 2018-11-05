@@ -7,6 +7,7 @@
 console.log('环境：', process.env.NODE_ENV)
 const PREFIX = '/api/vi';
 module.exports = app => {
+  console.log('app.config.env:',app.config.env)
   const {
     router,
     controller
@@ -17,4 +18,5 @@ module.exports = app => {
   router.post(PREFIX+'/deleteById', controller.home.homeDelete);
   router.post(PREFIX+'/update', controller.home.homeUpdate);
   router.post(PREFIX+'/login', controller.user.login);
+  router.post(PREFIX+'/register', controller.user.register);
 };

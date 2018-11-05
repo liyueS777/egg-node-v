@@ -8,7 +8,9 @@
 </head>
 <body>
     <div class="b">
-        <h1>HHIII</h1>
+        <h1>app.config.env: <%= config %></h1>
+        <h1>process.env.NODE_ENV: <%= NODE_ENV %></h1>
+        <h1>config.keys: <%= keys %></h1>
         <div id="post1">测试-查询</div>
         <hr>
         <div id="post2">
@@ -33,6 +35,13 @@
             <div>name:<input id="name" placeHolder="请输入name" /></div>
             <div>pwd:<input id="pwd" placeHolder="请输入pwd" /></div>
             <button id="login">login并且返回关联信息</button>
+        </div>
+        <hr>
+        <div id="post6">
+            <div>homeId:<input id="registerHomeId" placeHolder="请输入homeId" /></div>
+            <div>name:<input id="registerName" placeHolder="请输入name" /></div>
+            <div>pwd:<input id="registerPassword" placeHolder="请输入pwd" /></div>
+            <button id="register">注册</button>
         </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -120,6 +129,19 @@
                 else{
                     alert('缺少相应参数')
                 }
+            });
+            $("#register").on('click',function(){
+                axios.post(prefix+'/register',{
+                    homeId:$("#registerHomeId").val(),
+                    name:$("#registerName").val(),
+                    password:$("#registerPassword").val()
+                })
+                .then(function(res){
+                        console.log(res.data)
+                    })
+                    .catch(function(e){
+                        console.log(e)
+                    })
             })
         })
     </script>

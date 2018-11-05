@@ -4,12 +4,16 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async home() {
-    console.log(this.ctx.query.name)
-    await this.ctx.render('index.ejs')
+    console.log(this.ctx.query.name,'this.config',this.config.env)
+    await this.ctx.render('index.ejs',{
+      config:this.config.env,
+      NODE_ENV:process.env.NODE_ENV,
+      keys:this.config.keys
+    })
   };
 
   async homeFindAll(){
-    console.log(this.ctx.request.body);
+    // console.log('sequelize:',this);
     try{
       var user = await this.ctx.service.home.homeFindAll();
       this.ctx.body =  {

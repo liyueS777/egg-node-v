@@ -32,12 +32,23 @@ class UserController extends Controller {
   async register(){
     try{
       if(this.ctx.request.body.name && this.ctx.request.body.password&&this.ctx.request.body.homeId){
-        var user = await this.ctx.service.user.UserRegister();
-        this.ctx.body = {
-          code:1,
-          msg:"注册成功",
-          user
+        var setToken = 'liyue666';
+        var setTokenResult = await this.app.redis.set(setToken,JSON.stringify(this.ctx.request.body),'EX',60*4);
+        console.log('setTokenResult:',setTokenResult)
+        if(setTokenResult){
+          var user = await this.ctx.service.user.UserRegister();
+          this.ctx.body = {
+            code:1,
+            msg:"注册成功",
+            user:Object.assign({},user,{token:setToken})
+          }
+        }else {
+          this.ctx.body = {
+            code:-1,
+            msg:"token异常"
+          }
         }
+        
       }else {
         this.ctx.body = {
           code:-1,

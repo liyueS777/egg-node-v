@@ -13,7 +13,7 @@ module.exports = app => {
     controller
   } = app;
   router.get('/', app.middlewares.uppercase(), controller.home.home);
-  router.post(PREFIX+'/index', controller.home.homeFindAll);
+  router.post(PREFIX+'/index', app.middlewares.checkToken({},app),controller.home.homeFindAll);
   router.post(PREFIX+'/create', controller.home.homeCreate);
   router.post(PREFIX+'/deleteById', controller.home.homeDelete);
   router.post(PREFIX+'/update', controller.home.homeUpdate);

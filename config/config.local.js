@@ -42,6 +42,17 @@ module.exports = appInfo => {
       enable: false
     }
   }
+
+
+  //redis
+  config.redis = {
+    client:{
+      port:6379,
+      host:"127.0.0.1",
+      db:0,
+      password:"ly18820146660"
+    }
+  }
   // 自定义端口
   exports.cluster = {
     listen: {

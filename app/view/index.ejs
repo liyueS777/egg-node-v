@@ -11,7 +11,7 @@
         <h1>app.config.env: <%= config %></h1>
         <h1>process.env.NODE_ENV: <%= NODE_ENV %></h1>
         <h1>config.keys: <%= keys %></h1>
-        <div id="post1">测试-查询</div>
+        <div id="post1">测试-通过token-reids验证登录信息-查询</div>
         <hr>
         <div id="post2">
             <div>title:<input id="title" placeHolder="请输入title" /></div>
@@ -52,6 +52,10 @@
             $('#post1').on('click',function(){
                 axios.post(prefix+'/index',{
                     token:123
+                },{
+                    headers:{
+                        token:'liyue666'
+                    }
                 })
                 .then(function(res){
                     console.log(res)

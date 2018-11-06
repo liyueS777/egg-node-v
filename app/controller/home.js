@@ -15,6 +15,7 @@ class HomeController extends Controller {
   async homeFindAll(){
     // console.log('sequelize:',this);
     try{
+      await this.app.redis.set('init1',12345,'EX',60*2);
       var user = await this.ctx.service.home.homeFindAll();
       this.ctx.body =  {
         code:1,

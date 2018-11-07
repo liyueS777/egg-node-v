@@ -19,6 +19,7 @@
     "ejs": "^2.6.1",
     "eslint": "^4.11.0",
     "eslint-config-egg": "^6.0.0",
+    "md5": "^2.2.1",
     "mysql2": "^1.6.1",
     "webstorm-disable-index": "^1.2.0"
   },
@@ -26,7 +27,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-EGG-MY-NODE",
+    "start": "egg-scripts start --daemon --title=egg-server-EGG-MY-NODE --workers=3",
     "stop": "egg-scripts stop --title=egg-server-EGG-MY-NODE",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",

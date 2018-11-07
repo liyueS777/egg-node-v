@@ -1,16 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <div class="b">
-        <h1>app.config.env: <%= config %></h1>
-        <h1>process.env.NODE_ENV: <%= NODE_ENV %></h1>
-        <h1>config.keys: <%= keys %></h1>
+        <h1>app.config.env:
+            <%= config %>
+        </h1>
+        <h1>process.env.NODE_ENV:
+            <%= NODE_ENV %>
+        </h1>
+        <h1>config.keys:
+            <%= keys %>
+        </h1>
         <div id="post1">测试-通过token-reids验证登录信息-查询</div>
         <hr>
         <div id="post2">
@@ -43,111 +51,134 @@
             <div>pwd:<input id="registerPassword" placeHolder="请输入pwd" /></div>
             <button id="register">注册</button>
         </div>
+        <div class="post7">
+            <button id="upload">图片上传</button>
+        </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
     <script>
-        $(function(){
+        $(function () {
             var prefix = '/api/vi'
-            $('#post1').on('click',function(){
-                axios.post(prefix+'/index',{
-                    token:123
-                },{
-                    headers:{
-                        token:'liyue666'
-                    }
-                })
-                .then(function(res){
-                    console.log(res)
-                })
-                .catch(function(e){
-                    console.log(e)
-                })
+            $('#post1').on('click', function () {
+                axios.post(prefix + '/index', {
+                        token: 123
+                    }, {
+                        headers: {
+                            token: 'liyue666'
+                        }
+                    })
+                    .then(function (res) {
+                        console.log(res)
+                    })
+                    .catch(function (e) {
+                        console.log(e)
+                    })
             });
-            $('#create').on('click',function(){
-                if(!$('#title').val()){
+            $('#create').on('click', function () {
+                if (!$('#title').val()) {
                     alert('缺少title')
                     return
                 }
-                if(!$('#body').val()){
+                if (!$('#body').val()) {
                     alert('缺少body')
                     return
                 }
-                axios.post(prefix+'/create',{
-                    title:$('#title').val(),
-                    body:$('#body').val()
-                })
-                .then(function(res){
-                    console.log(res.data)
-                })
+                axios.post(prefix + '/create', {
+                        title: $('#title').val(),
+                        body: $('#body').val()
+                    })
+                    .then(function (res) {
+                        console.log(res.data)
+                    })
             })
-            $('#delete').on('click',function(){
-                if(!$('#deleteId').val()){
+            $('#delete').on('click', function () {
+                if (!$('#deleteId').val()) {
                     alert('缺少ID')
                     return
                 }
-                axios.post(prefix+'/deleteById',{
-                    id:$('#deleteId').val()
-                })
-                .then(function(res){
-                    console.log(res.data)
-                })
+                axios.post(prefix + '/deleteById', {
+                        id: $('#deleteId').val()
+                    })
+                    .then(function (res) {
+                        console.log(res.data)
+                    })
             });
-            $('#update').on('click',function(){
-                if(!$('#updateId').val()){
+            $('#update').on('click', function () {
+                if (!$('#updateId').val()) {
                     alert('缺少id')
                     return;
                 }
                 //至少有一个更新；
-                if(!$('#updateTitle').val() && !$('#updateBody').val()){
+                if (!$('#updateTitle').val() && !$('#updateBody').val()) {
                     alert('缺少需要更新的参数')
                     return
                 };
                 var data = {
-                    id:$('#updateId').val()
+                    id: $('#updateId').val()
                 };
-                if($('#updateTitle').val()){
+                if ($('#updateTitle').val()) {
                     data["title"] = $('#updateTitle').val()
                 }
-                if($('#updateBody').val()){
+                if ($('#updateBody').val()) {
                     data["body"] = $('#updateBody').val()
                 }
-                axios.post(prefix+'/update',data)
-                .then(function(res){
-                    console.log(res.data)
-                })
-            });
-            $('#login').on('click',function(){
-                if($("#name").val() && $('#pwd').val()){
-                    axios.post(prefix+'/login',{
-                        name:$("#name").val(),
-                        password:$("#pwd").val()
-                    })
-                    .then(function(res){
+                axios.post(prefix + '/update', data)
+                    .then(function (res) {
                         console.log(res.data)
                     })
-                    .catch(function(e){
-                        console.log(e)
-                    })
-                }
-                else{
+            });
+            $('#login').on('click', function () {
+                if ($("#name").val() && $('#pwd').val()) {
+                    axios.post(prefix + '/login', {
+                            name: $("#name").val(),
+                            password: $("#pwd").val()
+                        })
+                        .then(function (res) {
+                            console.log(res.data)
+                        })
+                        .catch(function (e) {
+                            console.log(e)
+                        })
+                } else {
                     alert('缺少相应参数')
                 }
             });
-            $("#register").on('click',function(){
-                axios.post(prefix+'/register',{
-                    homeId:$("#registerHomeId").val(),
-                    name:$("#registerName").val(),
-                    password:$("#registerPassword").val()
-                })
-                .then(function(res){
+            $("#register").on('click', function () {
+                axios.post(prefix + '/register', {
+                        homeId: $("#registerHomeId").val(),
+                        name: $("#registerName").val(),
+                        password: $("#registerPassword").val()
+                    })
+                    .then(function (res) {
                         console.log(res.data)
                     })
-                    .catch(function(e){
+                    .catch(function (e) {
                         console.log(e)
                     })
-            })
+            });
+            $('#upload').on('click', function () {
+                var file = document.createElement('input')
+                file.type = 'file';
+                file.click();
+                file.onchange = function (e) {
+                    console.log(this.files[0])
+                    var formData = new FormData();
+                    formData.append('file', this.files[0]);
+                    formData.append('filename', '123.png');
+                    formData.append('token', '666');
+                    axios.post(prefix + '/upload', formData)
+                        .then(res => {
+                            console.log('res:', res)
+                        })
+                        .catch(err => {
+                            console.log('err:', err)
+                        })
+                }
+
+            });
         })
     </script>
 </body>
+
 </html>

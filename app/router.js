@@ -19,4 +19,5 @@ module.exports = app => {
   router.post(PREFIX+'/update', controller.home.homeUpdate);
   router.post(PREFIX+'/login', controller.user.login);
   router.post(PREFIX+'/register', controller.user.register);
+  router.post(PREFIX+'/upload', controller.upload.upload);
 };

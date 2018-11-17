@@ -20,6 +20,7 @@
             <%= keys %>
         </h1>
         <div id="post1">测试-通过token-reids验证登录信息-查询</div>
+        <div class="result">结果：<span id="result"></span></div>
         <hr>
         <div id="post2">
             <div>title:<input id="title" placeHolder="请输入title" /></div>
@@ -53,6 +54,7 @@
         </div>
         <div class="post7">
             <button id="upload">图片上传</button>
+            <img src="" id="img" alt="">
         </div>
     </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
@@ -69,7 +71,12 @@
                         }
                     })
                     .then(function (res) {
-                        console.log(res)
+                        console.log(res);
+                        if(res.data.code==1){
+                            $("#result").text(res.data.msg)
+                        }else {
+                            $("#result").text(res.data.msg)
+                        }
                     })
                     .catch(function (e) {
                         console.log(e)
@@ -170,6 +177,9 @@
                     axios.post(prefix + '/upload', formData)
                         .then(res => {
                             console.log('res:', res)
+                            if(res.data.code==1){
+                                $('#img').attr('src',res.data.result.link)
+                            }
                         })
                         .catch(err => {
                             console.log('err:', err)

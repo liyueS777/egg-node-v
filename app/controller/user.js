@@ -33,7 +33,10 @@ class UserController extends Controller {
     try{
       if(this.ctx.request.body.name && this.ctx.request.body.password&&this.ctx.request.body.homeId){
         var setToken = 'liyue666';
-        var setTokenResult = await this.app.redis.set(setToken,JSON.stringify(this.ctx.request.body),'EX',60*4);
+        this.ctx.session = {
+          sessionId:this.ctx.request.body.name+'1234'
+        };
+        var setTokenResult = await this.app.redis.set(this.ctx.request.body.name+'1234',JSON.stringify(this.ctx.request.body),'EX',60*4);
         console.log('setTokenResult:',setTokenResult)
         if(setTokenResult){
           var user = await this.ctx.service.user.UserRegister();

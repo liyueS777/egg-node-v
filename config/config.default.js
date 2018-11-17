@@ -5,7 +5,7 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '这是default的config的keys';
-
+  config.preUploadUrl = "http://localhost:9898"
   // add your config here
   config.middleware = [];
 
@@ -31,14 +31,7 @@ module.exports = appInfo => {
   }
 //redis
 //redis
-config.redis = {
-  client:{
-    port:6379,
-    host:"127.0.0.1",
-    db:0,
-    password:"ly18820146660"
-  }
-}
+
   
 
   // 自定义端口
